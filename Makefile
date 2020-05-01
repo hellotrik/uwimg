@@ -1,18 +1,19 @@
 OPENCV=0
-OPENMP=0
+OPENMP=1
 DEBUG=0
+LIB=1
 
-OBJ=image_opencv.o load_image.o process_image.o args.o filter_image.o resize_image.o test.o harris_image.o matrix.o panorama_image.o flow_image.o list.o data.o classifier.o
+OBJ=image_opencv.o load_image.o args.o filter_image.o test.o harris_image.o matrix.o panorama_image.o flow_image.o list.o data.o net.o activations.o batch_norm.o connected_layer.o convolutional_layer.o maxpool_layer.o classifier.o 
 EXOBJ=main.o
 
-VPATH=./src/:./:./src/hw0:./src/hw1:./src/hw2:./src/hw3:./src/hw4:./src/hw5:./src/hw6:./src/hw7
+VPATH=./mysrc/:./:./mysrc/uwimg:./mysrc/uwnet
 SLIB=libuwimg.so
 ALIB=libuwimg.a
-EXEC=uwimg
+EXEC=uwtrik
 OBJDIR=./obj/
 
-CC=gcc
-CPP=g++ -std=c++11 
+CC=gcc -m64
+CPP=g++ -std=c++11 -m64
 AR=ar
 ARFLAGS=rcs
 OPTS=-Ofast
@@ -44,9 +45,12 @@ EXOBJS = $(addprefix $(OBJDIR), $(EXOBJ))
 OBJS = $(addprefix $(OBJDIR), $(OBJ))
 DEPS = $(wildcard src/*.h) Makefile 
 
-all: obj $(SLIB) $(ALIB) $(EXEC)
-#all: obj $(EXEC)
 
+ifeq ($(LIB), 1) 
+all: obj $(SLIB) $(ALIB) $(EXEC)
+else
+all: obj $(EXEC)
+endif
 
 $(EXEC): $(EXOBJS) $(OBJS)
 	$(CC) $(COMMON) $(CFLAGS) $^ -o $@ $(LDFLAGS) 
@@ -64,7 +68,7 @@ $(OBJDIR)%.o: %.cpp $(DEPS)
 	$(CPP) $(COMMON) $(CFLAGS) -c $< -o $@
 
 obj:
-	mkdir -p obj
+	mkdir obj
 
 .PHONY: clean
 
