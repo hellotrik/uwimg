@@ -18,7 +18,7 @@ AR=ar
 ARFLAGS=rcs
 OPTS=-Ofast
 LDFLAGS= -lm -pthread 
-COMMON= -Iinclude/ -Isrc/ 
+COMMON= -Iinclude/ -Imysrc/ 
 CFLAGS=-Wall -Wno-unknown-pragmas -Wfatal-errors -fPIC
 
 ifeq ($(OPENMP), 1) 
@@ -27,7 +27,7 @@ endif
 
 ifeq ($(DEBUG), 1) 
 OPTS=-O0 -g
-COMMON= -Iinclude/ -Isrc/ 
+COMMON= -Iinclude/ -Imysrc/ 
 else
 CFLAGS+= -flto
 endif
