@@ -1,4 +1,4 @@
-from uwimg import *
+from uwnet import *
 
 def draw_corners():
     im = load_image("data/Rainier1.png")
@@ -37,11 +37,11 @@ def rainier_panorama():
 
 
 def field_panorama():
-    im1 = load_image("data/field1.jpg")
-    im2 = load_image("data/field2.jpg")
-    im3 = load_image("data/field3.jpg")
-    im4 = load_image("data/field4.jpg")
-    im5 = load_image("data/field5.jpg")
+    im1 = load_image("data/sun1.jpg")
+    im2 = load_image("data/sun2.jpg")
+    im3 = load_image("data/sun3.jpg")
+    im4 = load_image("data/sun4.jpg")
+    im5 = load_image("data/sun5.jpg")
     im6 = load_image("data/field6.jpg")
     im7 = load_image("data/field7.jpg")
     im8 = load_image("data/field8.jpg")
@@ -56,20 +56,20 @@ def field_panorama():
     im8 = cylindrical_project(im8, 1200)
     save_image(im1, "cylindrical_projection")
 
-    pan = panorama_image(im5, im6, thresh=2, iters=50000, inlier_thresh=3)
+    pan = panorama_image(im1, im2, thresh=2, iters=50000, inlier_thresh=3)
     save_image(pan, "field_panorama_1")
-    pan2 = panorama_image(pan, im7, thresh=2, iters=50000, inlier_thresh=3)
+    pan2 = panorama_image(im3, im4, thresh=2, iters=50000, inlier_thresh=3)
     save_image(pan2, "field_panorama_2")
-    pan3 = panorama_image(pan2, im8, thresh=2, iters=50000, inlier_thresh=3)
+    pan3 = panorama_image(pan2, im5, thresh=2, iters=50000, inlier_thresh=3)
     save_image(pan3, "field_panorama_3")
-    pan4 = panorama_image(pan3, im4, thresh=2, iters=50000, inlier_thresh=3)
+    pan4 = panorama_image(pan, pan3, thresh=2, iters=50000, inlier_thresh=3)
     save_image(pan4, "field_panorama_4")
-    pan5 = panorama_image(pan4, im3, thresh=2, iters=50000, inlier_thresh=3)
+    pan5 = panorama_image(pan4, im7, thresh=2, iters=50000, inlier_thresh=3)
     save_image(pan5, "field_panorama_5")
 
-draw_corners()
-draw_matches()
-easy_panorama()
-#rainier_panorama()
-#field_panorama()
+##draw_corners()
+##draw_matches()
+##easy_panorama()
+rainier_panorama()
+##field_panorama()
 

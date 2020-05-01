@@ -1,4 +1,4 @@
-from uwimg import *
+from uwnet import *
 
 a = load_image("data/dog_a.jpg")
 b = load_image("data/dog_b.jpg")
